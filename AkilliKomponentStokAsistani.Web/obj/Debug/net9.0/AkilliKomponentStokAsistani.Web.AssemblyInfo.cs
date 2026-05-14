@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AkilliKomponentStokAsistani.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a94f2aa660324a1c32bcedb8cf4aa5fd6460af94")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f2af8198ce2d6361501e0ff43f2e6ef38a6ec658")]
 [assembly: System.Reflection.AssemblyProductAttribute("AkilliKomponentStokAsistani.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AkilliKomponentStokAsistani.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
