@@ -1,8 +1,125 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model AkilliKomponentStokAsistani.Web.ViewModels.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-4">
+    <h1 class="mb-4">Akıllı Komponent Stok Asistanı</h1>
+    <p class="lead">Elektronik komponentlerinizi kolayca yönetin ve kritik stok seviyelerini takip edin.</p>
+
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-white bg-primary">
+                <div class="card-body">
+                    <h5 class="card-title">Toplam Komponent</h5>
+                    <p class="card-text display-4">@Model.TotalComponentCount</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-danger">
+                <div class="card-body">
+                    <h5 class="card-title">Kritik Stok</h5>
+                    <p class="card-text display-4">@Model.CriticalStockCount</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-success">
+                <div class="card-body">
+                    <h5 class="card-title">Toplam Stok Adedi</h5>
+                    <p class="card-text display-4">@Model.TotalStockQuantity</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-info">
+                <div class="card-body">
+                    <h5 class="card-title">Ortalama Fiyat</h5>
+                    <p class="card-text display-4">@Model.AveragePrice.ToString("C")</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Kritik Stoktaki Ürünler</h3>
+            @if (!Model.CriticalStockItems.Any())
+            {
+                <div class="alert alert-warning">Kritik stokta ürün bulunmamaktadır.</div>
+            }
+            else
+            {
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Component Name</th>
+                            <th>Category</th>
+                            <th>Stock Quantity</th>
+                            <th>Minimum Stock Level</th>
+                            <th>Stok Durumu</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.CriticalStockItems)
+                        {
+                            <tr>
+                                <td>@item.ComponentName</td>
+                                <td>@item.Category</td>
+                                <td>@item.StockQuantity</td>
+                                <td>@item.MinimumStockLevel</td>
+                                <td>
+                                    <span class="badge bg-danger">Kritik Stok</span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+        <div class="col-md-6">
+            <h3>En Düşük Stoklu Ürünler</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Component Name</th>
+                        <th>Category</th>
+                        <th>Stock Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.LowestStockItems)
+                    {
+                        <tr>
+                            <td>@item.ComponentName</td>
+                            <td>@item.Category</td>
+                            <td>@item.StockQuantity</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h3>Kategori Dağılımı</h3>
+            <ul class="list-group">
+                @foreach (var category in Model.CategoryCounts)
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        @category.Key
+                        <span class="badge bg-primary rounded-pill">@category.Value</span>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a class="btn btn-primary" asp-controller="Components" asp-action="Index">Komponentleri Görüntüle</a>
+        <a class="btn btn-success" asp-controller="Components" asp-action="Create">Yeni Komponent Ekle</a>
+        <a class="btn btn-danger" asp-controller="Components" asp-action="CriticalStock">Kritik Stokları İncele</a>
+    </div>
 </div>
