@@ -1,0 +1,41 @@
+@model IEnumerable<AkilliKomponentStokAsistani.Web.Models.ComponentItem>
+@{
+    ViewData["Title"] = "Critical Stock";
+}
+
+<h1>Critical Stock</h1>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-warning" role="alert">
+        Kritik stokta ürün bulunmamaktadır.
+    </div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Component Name</th>
+                <th>Category</th>
+                <th>Package Type</th>
+                <th>Price</th>
+                <th>Stock Quantity</th>
+                <th>Minimum Stock Level</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ComponentName</td>
+                    <td>@item.Category</td>
+                    <td>@item.PackageType</td>
+                    <td>@item.Price.ToString("C")</td>
+                    <td>@item.StockQuantity</td>
+                    <td>@item.MinimumStockLevel</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

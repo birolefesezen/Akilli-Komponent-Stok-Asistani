@@ -1,0 +1,54 @@
+@model IEnumerable<AkilliKomponentStokAsistani.Web.Models.ComponentItem>
+@{
+    ViewData["Title"] = "Components";
+}
+
+<h1>Components</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Yeni Komponent Ekle</a>
+    <a class="btn btn-danger" asp-action="CriticalStock">Kritik Stokları Görüntüle</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Component Name</th>
+            <th>Category</th>
+            <th>Package Type</th>
+            <th>Price</th>
+            <th>Stock Quantity</th>
+            <th>Minimum Stock Level</th>
+            <th>Stok Durumu</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ComponentName</td>
+                <td>@item.Category</td>
+                <td>@item.PackageType</td>
+                <td>@item.Price.ToString("C")</td>
+                <td>@item.StockQuantity</td>
+                <td>@item.MinimumStockLevel</td>
+                <td>
+                    @if (item.IsCriticalStock)
+                    {
+                        <span class="badge bg-danger">Kritik Stok</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-success">Yeterli Stok</span>
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Detaylar</a>
+                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

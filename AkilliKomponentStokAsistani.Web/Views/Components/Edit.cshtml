@@ -1,0 +1,54 @@
+@model AkilliKomponentStokAsistani.Web.Models.ComponentItem
+@{
+    ViewData["Title"] = "Edit Component";
+}
+
+<h1>Edit Component</h1>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label asp-for="ComponentName" class="control-label"></label>
+        <input asp-for="ComponentName" class="form-control" />
+        <span asp-validation-for="ComponentName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Category" class="control-label"></label>
+        <input asp-for="Category" class="form-control" />
+        <span asp-validation-for="Category" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PackageType" class="control-label"></label>
+        <input asp-for="PackageType" class="form-control" />
+        <span asp-validation-for="PackageType" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Price" class="control-label"></label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="StockQuantity" class="control-label"></label>
+        <input asp-for="StockQuantity" class="form-control" />
+        <span asp-validation-for="StockQuantity" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MinimumStockLevel" class="control-label"></label>
+        <input asp-for="MinimumStockLevel" class="form-control" />
+        <span asp-validation-for="MinimumStockLevel" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description" class="control-label"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DatasheetUrl" class="control-label"></label>
+        <input asp-for="DatasheetUrl" class="form-control" />
+        <span asp-validation-for="DatasheetUrl" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+        <a asp-action="Index" class="btn btn-secondary">Geri Dön</a>
+    </div>
+</form>
