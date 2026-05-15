@@ -43,62 +43,75 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6">
-            <h3>Kritik Stoktaki Ürünler</h3>
-            @if (!Model.CriticalStockItems.Any())
-            {
-                <div class="alert alert-warning">Kritik stokta ürün bulunmamaktadır.</div>
-            }
-            else
-            {
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Component Name</th>
-                            <th>Category</th>
-                            <th>Stock Quantity</th>
-                            <th>Minimum Stock Level</th>
-                            <th>Stok Durumu</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.CriticalStockItems)
-                        {
-                            <tr>
-                                <td>@item.ComponentName</td>
-                                <td>@item.Category</td>
-                                <td>@item.StockQuantity</td>
-                                <td>@item.MinimumStockLevel</td>
-                                <td>
-                                    <span class="badge bg-danger">Kritik Stok</span>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            }
-        </div>
-        <div class="col-md-6">
-            <h3>En Düşük Stoklu Ürünler</h3>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Component Name</th>
-                        <th>Category</th>
-                        <th>Stock Quantity</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.LowestStockItems)
+        <div class="col-md-12 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h3>Kritik Stoktaki Ürünler</h3>
+                    @if (!Model.CriticalStockItems.Any())
                     {
-                        <tr>
-                            <td>@item.ComponentName</td>
-                            <td>@item.Category</td>
-                            <td>@item.StockQuantity</td>
-                        </tr>
+                        <div class="alert alert-warning">Kritik stokta ürün bulunmamaktadır.</div>
                     }
-                </tbody>
-            </table>
+                    else
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Component Name</th>
+                                        <th>Category</th>
+                                        <th>Stock Quantity</th>
+                                        <th>Minimum Stock Level</th>
+                                        <th>Stok Durumu</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.CriticalStockItems)
+                                    {
+                                        <tr>
+                                            <td>@item.ComponentName</td>
+                                            <td>@item.Category</td>
+                                            <td>@item.StockQuantity</td>
+                                            <td>@item.MinimumStockLevel</td>
+                                            <td>
+                                                <span class="badge bg-danger">Kritik Stok</span>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h3>En Düşük Stoklu Ürünler</h3>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Component Name</th>
+                                    <th>Category</th>
+                                    <th>Stock Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.LowestStockItems)
+                                {
+                                    <tr>
+                                        <td>@item.ComponentName</td>
+                                        <td>@item.Category</td>
+                                        <td>@item.StockQuantity</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
