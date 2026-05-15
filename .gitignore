@@ -1,0 +1,21 @@
+@"
+# Build outputs
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio / VS Code
+.vs/
+.vscode/
+*.user
+*.suo
+*.lscache
+
+# SQLite database files
+*.db
+*.db-shm
+*.db-wal
+
+# OS files
+.DS_Store
+Thumbs.db
+"@ | Set-Content .gitignore -Encoding UTF8
