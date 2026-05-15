@@ -9,14 +9,14 @@ namespace AkilliKomponentStokAsistani.Web.Models
 
         [Required]
         [MaxLength(100)]
-        public string ComponentName { get; set; }
+        public string ComponentName { get; set; } = string.Empty;
 
         [Required]
         [MaxLength(50)]
-        public string Category { get; set; }
+        public string Category { get; set; } = string.Empty;
 
         [MaxLength(50)]
-        public string PackageType { get; set; }
+        public string PackageType { get; set; } = string.Empty;
 
         [Range(0, double.MaxValue)]
         public decimal Price { get; set; }
@@ -28,10 +28,10 @@ namespace AkilliKomponentStokAsistani.Web.Models
         public int MinimumStockLevel { get; set; }
 
         [MaxLength(500)]
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
         [Url]
-        public string DatasheetUrl { get; set; }
+        public string DatasheetUrl { get; set; } = string.Empty;
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 

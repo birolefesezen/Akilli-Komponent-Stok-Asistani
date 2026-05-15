@@ -1,5 +1,7 @@
 using AkilliKomponentStokAsistani.Web.Data;
 using Microsoft.EntityFrameworkCore;
+using AkilliKomponentStokAsistani.Web.Repositories;
+using AkilliKomponentStokAsistani.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IComponentRepository, ComponentRepository>();
+builder.Services.AddScoped<IComponentService, ComponentService>();
 
 var app = builder.Build();
 
