@@ -1,6 +1,7 @@
 using AkilliKomponentStokAsistani.Web.Models;
 using AkilliKomponentStokAsistani.Web.Services;
 using Microsoft.AspNetCore.Mvc;
+using AkilliKomponentStokAsistani.Web.ViewModels;
 
 namespace AkilliKomponentStokAsistani.Web.Controllers
 {
@@ -13,10 +14,38 @@ namespace AkilliKomponentStokAsistani.Web.Controllers
             _componentService = componentService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? searchTerm, string? category, bool? showOnlyCritical)
         {
             var components = await _componentService.GetAllAsync();
-            return View(components);
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                components = components.Where(c => c.ComponentName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                                                   c.Description.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
+            if (!string.IsNullOrWhiteSpace(category))
+            {
+                components = components.Where(c => c.Category.Equals(category, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
+            if (showOnlyCritical == true)
+            {
+                components = components.Where(c => c.IsCriticalStock).ToList();
+            }
+
+            var categories = components.Select(c => c.Category).Distinct().ToList();
+
+            var viewModel = new ComponentIndexViewModel
+            {
+                Components = components,
+                SearchTerm = searchTerm,
+                SelectedCategory = category,
+                ShowOnlyCritical = showOnlyCritical ?? false,
+                Categories = categories
+            };
+
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Details(int id)

@@ -1,14 +1,51 @@
-@model IEnumerable<AkilliKomponentStokAsistani.Web.Models.ComponentItem>
+@model AkilliKomponentStokAsistani.Web.ViewModels.ComponentIndexViewModel
 @{
     ViewData["Title"] = "Components";
 }
 
 <h1>Components</h1>
 
-<p>
-    <a class="btn btn-primary" asp-action="Create">Yeni Komponent Ekle</a>
-    <a class="btn btn-danger" asp-action="CriticalStock">Kritik Stokları Görüntüle</a>
-</p>
+<form method="get" class="mb-4">
+    <div class="row">
+        <div class="col-md-4">
+            <input type="text" name="searchTerm" value="@Model.SearchTerm" class="form-control" placeholder="Komponent Ara" />
+        </div>
+        <div class="col-md-4">
+            <select name="category" class="form-select">
+                @if (string.IsNullOrEmpty(Model.SelectedCategory))
+                {
+                    <option value="" selected>Tüm Kategoriler</option>
+                }
+                else
+                {
+                    <option value="">Tüm Kategoriler</option>
+                }
+
+                @foreach (var category in Model.Categories)
+                {
+                    if (Model.SelectedCategory == category)
+                    {
+                        <option value="@category" selected>@category</option>
+                    }
+                    else
+                    {
+                        <option value="@category">@category</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-md-2">
+            <div class="form-check">
+                <input type="checkbox" name="showOnlyCritical" class="form-check-input" id="showOnlyCritical" @(Model.ShowOnlyCritical ? "checked" : "") />
+                <label class="form-check-label" for="showOnlyCritical">Sadece Kritik Stok</label>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary">Filtrele</button>
+            <a href="/Components" class="btn btn-secondary">Temizle</a>
+        </div>
+    </div>
+</form>
 
 <table class="table table-striped">
     <thead>
@@ -24,7 +61,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Components)
         {
             <tr>
                 <td>@item.ComponentName</td>
